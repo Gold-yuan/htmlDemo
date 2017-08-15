@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="aplus-terminal" content="1">
+<meta name="apple-mobile-web-app-title" content="">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style"
+	content="black-translucent">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="format-detection" content="telephone=no, address=no">
+<title>人工智能系统</title>
+
+<link rel="stylesheet" type="text/css" href="resources/css/index.css">
+<script type="text/javascript" src="resources/js/jquery-2.1.4.min.js"></script>
+
+<style type="text/css">
+</style>
+</head>
+<body>
+	<div class="content">
+		<div class="mobile-page" >
+			<div id="duihua">
+				<div class="admin-group">
+					<img class="admin-img" src="resources/img/head-robot.jpg" />
+					<div class="admin-msg">
+						<i class="triangle-admin"></i> <span class="admin-reply">欢迎光临人工智能系统</span>
+					</div>
+				</div>
+			</div>
+			<a href="#bottom" name="bottom" id="bottom"></a>
+			
+			<div style="display: none;">
+				<div class="admin-group" id="robot">
+					<img class="admin-img" src="resources/img/head-robot.jpg" />
+					<div class="admin-msg">
+						<i class="triangle-admin"></i> <span class="admin-reply"></span>
+					</div>
+				</div>
+				<div class="user-group" id="man">
+					<div class="user-msg">
+						<span class="user-reply"></span> <i class="triangle-user"></i>
+					</div>
+					<img class="user-img" src="resources/img/head-boy.jpg" />
+				</div>
+			</div>
+		</div>
+		<div class="send">
+			<input type="text" id="keyword" placeholder="想说点什么..." class="input-text" onkeypress="submit(event)" /> 
+			<input type="submit" value="发送" class="input-submit" onclick="send()"/>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+$(function(){
+	$("#keyword").focus();
+});
+function submit(e){
+	var e = e||window.event;
+	if(e.keyCode == 13){
+		send();
+	}
+}
+function send(){
+	var keyword = $.trim($("#keyword").val());	
+	if(keyword==""){
+		$("#keyword").val("");
+		return;
+	}
+	$("#keyword").val("");
+	var parentDiv = $("#duihua");
+	var man = $("#man").clone();
+	man.find("span").text(keyword);
+	parentDiv.append(man);
+	$("#keyword").focus();
+	$("#bottom")[0].click();
+	/*
+	$.ajax({
+		type:"post",
+		url:"hello",
+		data:{keyword:keyword},
+		success:function(data){
+			if(data=="退出"){  
+				CloseWebPage();
+			}
+			var robot = $("#robot").clone();
+			robot.find("span").text(data);
+			parentDiv.append(robot);
+			$("#bottom")[0].click();
+			$("#keyword").focus();
+		}
+	});
+	*/
+	
+	var robot = $("#robot").clone();
+	robot.find("span").text("你他么还不学习，瞅什么");
+	parentDiv.append(robot);
+	$("#bottom")[0].click();
+	$("#keyword").focus();
+}
+
+
+function CloseWebPage() {
+	if (navigator.userAgent.indexOf("MSIE") > 0) {
+		if (navigator.userAgent.indexOf("MSIE 6.0") > 0) {
+			window.opener = null;
+			window.close();
+		} else {
+			window.open('', '_top');
+			window.top.close();
+		}
+	} else if (navigator.userAgent.indexOf("Firefox") > 0) {
+		window.location.href = 'about:blank';
+	} else {
+		window.opener = null;
+		window.open('', '_self', '');
+		window.close();
+	}
+	window.location.href = 'about:blank ';
+}
+</script>
+</html>
